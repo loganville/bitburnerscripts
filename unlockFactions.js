@@ -81,13 +81,15 @@ async function unlockFunctions(ns, factions) {
 }
 
 async function join(ns, faction) {
-	while (!ns.joinFaction(faction)) {
+	let attempts = 0;
+	while (!ns.joinFaction(faction) && attempts < 100) {
 		await ns.sleep(1000);
+		attempts++;
 	}
 }
 
 function backdoor(ns, server) {
-	ns.exec("search.js", "home", 1, server);
+	ns.exec("backdoor.js", "home", 1, server);
 }
 
 function getFactionsWithAugs(ns) {
