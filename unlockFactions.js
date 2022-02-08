@@ -18,9 +18,7 @@ export async function main(ns) {
 		for (const cityGroup of cities) {
 			if (_.intersection(neededFactions, cityGroup).length > 0 ||
 				_.intersection(factionMemberships, cityGroup).length > 0) {
-				ns.tprint("need to join:" + cityGroup);
 				const conflictingCities = _.difference(_.flatten(cities), _.flatten(cityGroup));
-				ns.tprint("removing these:" + conflictingCities);
 				neededFactions = _.difference(neededFactions, _.flatten(conflictingCities));
 				break;
 			}
