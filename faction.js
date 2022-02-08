@@ -4,7 +4,7 @@ export async function main(ns) {
 }
 
 export function getPlayerFactions(ns) {
-	var factionOrder = ["CyberSec", "Tian Di Hui", "Netburners",
+	var factionOrder = ["Tian Di Hui", "CyberSec", "Netburners",
 		"Sector-12", "Aevum",
 		"Chongqing", "New Tokyo", "Ishima",
 		"Volhaven",
@@ -67,7 +67,8 @@ function totalFactionFavor(ns, faction) {
 }
 
 export async function increaseFactionRep(ns, faction, repRequired, currentFactionCount) {
-	while (ns.getFactionRep(faction) < repRequired && totalFactionFavor(ns, faction) < 150) {
+	while (ns.getFactionRep(faction) < repRequired &&
+		totalFactionFavor(ns, faction) < ns.getFavorToDonate(faction)) {
 		ns.workForFaction(faction, "Hacking Contracts", false);
 		await ns.sleep(60000);
 		if (getPlayerFactions(ns).length > currentFactionCount) {
