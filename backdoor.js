@@ -1,19 +1,12 @@
 /** @param {NS} ns **/
 export async function main(ns) {
 	const s_target = ns.args[0];
-	if (s_target == null) {
-		return ns.tprint('Returns path to the searched server. Usage: run search.js <some_server>');
-	}
+
 	let search_result = await scanAll(ns, 'home', s_target);
 	if (search_result !== null) {
-		ns.tprint(search_result.map((node) => {
+		search_result.map((node) => {
 			ns.connect(node);
-			return `connect ${node}; `
-		}).reduce((prev, curr) => {
-			return prev + curr
-		}));
-	} else {
-		ns.tprint(`Server "${s_target}" was not found!`);
+		});
 	}
 	if (ns.hasRootAccess(s_target)) {
 		await ns.installBackdoor();
