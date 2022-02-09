@@ -23,7 +23,11 @@ export async function main(ns) {
 				break;
 			}
 		}
-		await unlockFunctions(ns, neededFactions);
+
+		if (neededFactions.length > 0) {
+			//ns.tprint(neededFactions);
+			await unlockFunctions(ns, neededFactions);
+		}
 		await ns.sleep(10000);
 	}
 }
@@ -47,32 +51,33 @@ async function unlockFunctions(ns, factions) {
 				backdoor(ns, "run4theh111z");
 				await join(ns, faction);
 				break;
-			case "Daedalus":
-				await join(ns, faction);
-				break;
 			case "Sector-12":
 				ns.travelToCity("Ishima");
-				await join(ns.faction);
+				await join(ns, faction);
 				break;
 			case "Aevum":
 				ns.travelToCity("Ishima");
 				await join(ns.faction);
 				break;
 			case "Chongqing":
+			case "Tian Di Hui":
 				ns.travelToCity("Chongqing");
 				await join(ns, faction);
 				break;
 			case "New Tokyo":
 				ns.travelToCity("New Tokyo");
-				await join(ns.faction);
+				await join(ns, faction);
 				break;
 			case "Ishima":
 				ns.travelToCity("Ishima");
-				await join(ns.faction);
+				await join(ns, faction);
 				break;
 			case "Volhaven":
-				ns.travelToCity("Ishima");
-				await join(ns.faction);
+				ns.travelToCity("Volhaven");
+				await join(ns, faction);
+				break;
+			default:
+				await join(ns, faction);
 				break;
 		}
 	}
